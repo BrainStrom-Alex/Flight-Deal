@@ -9,7 +9,6 @@ class FlightSearch:
         self.api_key = os.getenv("SERPAPI_API_KEY")
         self.endpoint = os.getenv("FLIGHT_API_ENDPOINT")
 
-
     def check_flights(self, origin_city_code, destination_city_code, from_time, to_time):
         para = {
             "engine": "google_flights",
@@ -36,5 +35,3 @@ class FlightSearch:
             return None
 
         return data
-
-

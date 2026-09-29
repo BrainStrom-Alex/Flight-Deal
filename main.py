@@ -10,8 +10,6 @@ msg = []
 my_email = "abc@gmail.com"
 password = "abcdefghijkl"
 
-
-
 requests_cache.install_cache(
     "flight_cache",
     urls_expire_after={
@@ -20,11 +18,8 @@ requests_cache.install_cache(
     }
 )
 
-
 DataManager = DataManager()
 sheety_data = DataManager.get_destination_data()
-# pprint(sheety_data)
-
 
 tomorrow = datetime.now() + timedelta(days=1)
 six_month_from_today = datetime.now() + timedelta(days=(6*30))
@@ -53,7 +48,6 @@ for destination in sheety_data:
          f"on {cheapest_flight.out_date} until {cheapest_flight.return_date}")
 
     msg.append(message)
-
 
 with smtplib.SMTP("smtp.gmail.com", 587) as connection:
     connection.starttls()

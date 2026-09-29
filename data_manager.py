@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-
 url_datasheet = "https://api.sheety.co/fbaf84ba19e1c64ba14c243fb02101aa/myFlightDeals/prices"
 
 class DataManager:
