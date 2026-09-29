@@ -12,7 +12,22 @@ class DataManager:
         self.username = os.getenv("SHEETY_USERNAME")
         self.password = os.getenv("SHEETY_PASSWORD")
         self.AUTH = (self.username, self.password)
-        self.response = requests.get(url=url_datasheet, auth=self.AUTH)
+        self.destination_data = {}
 
-    def data(self):
-        return self.response.json()["prices"]
+    def get_destination_data(self):
+        response = requests.get(url=url_datasheet, auth=self.AUTH)
+        data = response.json()
+        self.destination_data = data["prices"]
+        return self.destination_data
+
+    def update_lowest_price(self, row_id, new_price):
+        new_data = {
+            "price": {
+                "lowestPrice": new_price
+            }
+        }
+        requests.put(
+            url=f"{url_datasheet}/{row_id}",
+            json=new_data,
+            auth=self.AUTH
+        )
