@@ -38,3 +38,5 @@ class DataManager:
         email_data = respond.json()
         self.customer_email = email_data["users"]
         return self.customer_email
+
+
