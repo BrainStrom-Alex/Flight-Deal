@@ -8,7 +8,7 @@ import smtplib
 
 msg = []
 my_email = "abc@gmail.com"
-password = "abcdefghijkl"
+password = "abcdefghijklmn"
 
 requests_cache.install_cache(
     "flight_cache",
@@ -19,6 +19,9 @@ requests_cache.install_cache(
 )
 
 DataManager = DataManager()
+customer_data = DataManager.get_customer_email()
+customer_email_list = [row["whatIsYourEmail?"] for row in customer_data]
+
 sheety_data = DataManager.get_destination_data()
 
 tomorrow = datetime.now() + timedelta(days=1)
@@ -52,4 +55,5 @@ for destination in sheety_data:
 with smtplib.SMTP("smtp.gmail.com", 587) as connection:
     connection.starttls()
     connection.login(user=my_email, password=password)
-    connection.sendmail(from_addr=my_email, to_addrs="xyz@gmail.com", msg=msg[0])
+    for email in customer_email_list:
+        connection.sendmail(from_addr=my_email, to_addrs=email, msg=msg[0])
